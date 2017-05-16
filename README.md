@@ -21,8 +21,8 @@
 ## Хранение данных
 
 * Бинарные файлы - на жёстких дисках (хранилища типа amazon s3)
-* Информация о песнях - в NoSQL базе данных
-* кэш
+* Информация о песнях - в NoSQL базе данных (возможно MongoDB)
+* Кэш
 
 ## Технологии
    * REST ful service - стильно модно молодежно
@@ -39,3 +39,11 @@
    `POST /playlists`
 
    BODY: `{"name": "name", "playlistId": "a568b9c512febeaf64782", "songs": [{"songId" : "someId"} ...] }`
+   
+* Обновить плейлист
+   
+   `PUT /playlists/{playlistId}`
+   
+   BODY: `[{"songId" : "someId"} ...]`
+   
+* TODO
