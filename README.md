@@ -57,13 +57,7 @@
 
    `POST /playlists`
 
-   BODY: `{"name": "name", "playlistId": "a568b9c512febeaf64782", "songs": [{"songId" : "someId"} ...] }`
- 
-* Получить плейлист
-
-   'GET /playlists/{ID}' 
-   
-   RESPONSE:
+   BODY: 
    ```
    {
       "id": "abcdef1234567890"
@@ -75,6 +69,13 @@
       "isAvailable": true
    }
    ```
+ 
+* Получить плейлист
+
+   'GET /playlists/{ID}' 
+   
+   RESPONSE: PLAYLIST
+
    
 * Обновить плейлист
    
