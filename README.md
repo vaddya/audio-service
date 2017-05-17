@@ -22,6 +22,7 @@
 
 * Бинарные файлы - на жёстких дисках (хранилища типа amazon s3)
 * Информация о песнях - в NoSQL базе данных (возможно MongoDB)
+
 * Кэш
 
 ## Технологии
@@ -32,22 +33,52 @@
 
 * Поиск песен
 
-   `GET /search?name=NAME&artist=ARTIST&genre=GENRE&year=2018`
+   `GET /search?id={ID}&name={NAME}&artist={ARTIST}&genre={GENRE}&year={YEAR}`
+
+   RESPONSE:
+   ```
+   [
+      {
+       "id": "ID",
+       "name": "Song",
+       "artist": "Artist",
+       "genre": "Genre",
+       "year": 2017,
+       "album": "Album",
+       "text": "Text",
+       "duration": 100,
+       "ref": "/fdsfsdf/gfdgdf/4dfs/34/song.mp3",
+       "isAvailable": true
+      }
+   ]
+   ```
 
 * Создать плейлист
 
    `POST /playlists`
 
    BODY: `{"name": "name", "playlistId": "a568b9c512febeaf64782", "songs": [{"songId" : "someId"} ...] }`
+ 
+* Получить плейлист
+
+   'GET /playlists/{ID}' 
+   
+   RESPONSE:
+   ```
+   {
+      "id": "abcdef1234567890"
+      "name": "NAME",
+      "songsIds": [
+       "id1",
+       "id2"
+      ],
+      "isAvailable": true
+   }
+   ```
    
 * Обновить плейлист
    
-   `PUT /playlists/{playlistId}`
+   `PUT /playlists/{ID}`
    
-   BODY: `[{"songId" : "someId"} ...]`
-   
-* Получить песню
-
-* Получить плейлист
-   
-* TODO
+   BODY: PLAYLIST
+ 
