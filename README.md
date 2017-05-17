@@ -25,7 +25,7 @@
 * Кэш
 
 ## Технологии
-   * REST ful service - стильно модно молодежно
+   * REST ful service
 
 ## API
 Решено сделать restful сервис, поэтому rest api:
@@ -45,5 +45,9 @@
    `PUT /playlists/{playlistId}`
    
    BODY: `[{"songId" : "someId"} ...]`
+   
+* Получить песню
+
+* Получить плейлист
    
 * TODO
