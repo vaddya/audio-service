@@ -78,7 +78,28 @@
 
    'GET /playlists/{ID}' 
    
-   RESPONSE: PLAYLIST
+   RESPONSE:
+   ```
+   {
+      "id": "abcdef1234567890",
+      "name": "NAME",
+      "songs": [
+         {
+            "id": "ID",
+            "name": "Song",
+            "artist": "Artist",
+            "genre": "Genre",
+            "year": 2017,
+            "album": "Album",
+            "text": "Text",
+            "duration": 100,
+            "ref": "/fdsfsdf/gfdgdf/4dfs/34/song.mp3",
+            "isAvailable": true
+         }
+      ],
+      "isAvailable": true
+   }
+   ```
 
    
 * Обновить плейлист
