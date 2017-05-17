@@ -1,4 +1,4 @@
-# Music-service
+# Audio-service
 
 ## Задачи
 
@@ -132,7 +132,7 @@
    RESPONSE:
    ```
    {
-      "user_id": "abcdef1234567890",
+      "userId": "abcdef1234567890",
       "name": "NAME",
       "playlists": [
          {
