@@ -121,7 +121,7 @@
    
 * Получить список плейлистов пользвоателя
 
-   GET /{user_id}/playlists
+   GET /{userId}/playlists
  
    RESPONSE:
    ```
