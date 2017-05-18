@@ -51,7 +51,7 @@
    `GET /search?id={ID}&name={NAME}&artist={ARTIST}&genre={GENRE}&year={YEAR}`
 
    RESPONSE:
-   ```
+   ```JSON
    [
       {
        "id": "ID",
@@ -73,7 +73,7 @@
    `POST /playlists`
 
    BODY: 
-   ```
+   ```JSON
    {
       "id": "abcdef1234567890",
       "name": "NAME",
@@ -90,7 +90,7 @@
    'GET /playlists/{ID}' 
    
    RESPONSE:
-   ```
+   ```JSON
    {
       "id": "abcdef1234567890",
       "name": "NAME",
@@ -124,7 +124,7 @@
    GET /{userId}/playlists
  
    RESPONSE:
-   ```
+   ```JSON
    {
       "userId": "abcdef1234567890",
       "name": "NAME",
