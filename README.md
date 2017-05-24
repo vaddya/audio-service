@@ -12,7 +12,7 @@
 
 ## Архитектура
 
-![Nodes](Architecture.png)
+![Nodes](diagrams/Architecture.png)
 
 ## Хранение данных
 
