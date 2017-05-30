@@ -1,13 +1,16 @@
 buildscript {
+    ext.kotlin_version = '1.1.2-4'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 apply plugin: 'idea'
+apply plugin: 'kotlin'
 apply plugin: 'org.springframework.boot'
 
 jar {
@@ -16,10 +19,15 @@ jar {
 }
 
 dependencies {
+    compile 'com.google.code.gson:gson:2.8.0'
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile 'org.mongodb:mongodb-driver:3.3.0'
+    compile 'org.mongodb:mongo-java-driver:3.3.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'com.jayway.jsonpath:json-path:2.2.0'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+
 }
 
 task stage {
@@ -36,3 +44,6 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
+repositories {
+    mavenCentral()
+}
