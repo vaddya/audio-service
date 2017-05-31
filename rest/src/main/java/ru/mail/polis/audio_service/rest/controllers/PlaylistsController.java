@@ -14,15 +14,12 @@ import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-//FIXME build fail with Cannot map '/songs' method
-//FIXME public void ru.mail.polis.audio_service.rest.controllers.SongsController.createSong(java.lang.String)
-//FIXME         to {[],methods=[POST],consumes=[application/json]}: There is already '/playlists' bean method
-//FIXME public void ru.mail.polis.audio_service.rest.controllers.PlaylistsController.createPlaylist
-//@RestController("/playlists")
+@RestController
+@RequestMapping("/playlists")
 public class PlaylistsController {
 
-    private final MongoDatabase db;
-    private final Gson gson;
+    private MongoDatabase db;
+    private Gson gson;
 
     @Autowired
     public PlaylistsController(MongoDatabase db, Gson gson) {

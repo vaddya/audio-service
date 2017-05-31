@@ -7,8 +7,7 @@ data class Song(var id: String,
                 var genre: String,
                 var year: Int,
                 var album: String,
-                var text: String,
+                var lyrics: String,
                 var duration: Int,
                 var reference: String,
                 var available: Boolean)
-

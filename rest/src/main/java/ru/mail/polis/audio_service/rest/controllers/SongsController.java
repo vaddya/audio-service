@@ -2,7 +2,9 @@ package ru.mail.polis.audio_service.rest.controllers;
 
 import com.google.gson.Gson;
 import com.mongodb.client.MongoDatabase;
+import org.bson.BsonDocument;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.mail.polis.audio_service.rest.model.Song;
@@ -10,11 +12,14 @@ import ru.mail.polis.audio_service.rest.model.Song;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
-@RestController("/songs")
+@RestController
+@RequestMapping("/songs")
 public class SongsController {
 
     private final MongoDatabase db;
@@ -27,12 +32,30 @@ public class SongsController {
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public Collection<Song> songs() {
+    public Collection<Song> songs(@RequestParam(required = false) String id,
+                                  @RequestParam(required = false) String name,
+                                  @RequestParam(required = false) String artist,
+                                  @RequestParam(required = false) String genre,
+                                  @RequestParam(required = false) Integer year,
+                                  @RequestParam(required = false) Integer limit) {
+        Bson filter = createFilter(id, name, artist, genre, year, limit);
+
         return db.getCollection("songs")
-                .find()
+                .find(filter)
                 .into(new ArrayList<>())
                 .stream().map(x -> gson.fromJson(x.toJson(), Song.class))
                 .collect(toList());
+    }
+
+    private Bson createFilter(String id, String name, String artist, String genre, Integer year, Integer limit) {
+        Bson filter = new BsonDocument();
+        filter = id != null ? and(filter, eq("id", id)) : filter;
+        filter = name != null ? and(filter, eq("name", name)) : filter;
+        filter = artist != null ? and(filter, eq("artist", artist)) : filter;
+        filter = genre != null ? and(filter, eq("genre", genre)) : filter;
+        filter = year != null ? and(filter, eq("year", year)) : filter;
+        filter = limit != null ? and(filter, eq("limit", limit)) : filter;
+        return filter;
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
