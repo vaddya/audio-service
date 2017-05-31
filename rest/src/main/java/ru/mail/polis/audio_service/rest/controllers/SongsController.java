@@ -1,6 +1,6 @@
 package ru.mail.polis.audio_service.rest.controllers;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import org.bson.BsonDocument;
@@ -8,10 +8,13 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.mail.polis.audio_service.rest.model.Playlist;
 import ru.mail.polis.audio_service.rest.model.Song;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
@@ -63,5 +66,7 @@ public class SongsController {
     public void createSong(@RequestBody String song) {
         db.getCollection("songs").insertOne(Document.parse(song));
     }
+
+
 
 }
