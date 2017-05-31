@@ -10,7 +10,6 @@ import ru.mail.polis.audio_service.rest.model.Playlist;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.CREATED;

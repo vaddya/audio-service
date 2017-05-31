@@ -8,6 +8,8 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.mail.polis.audio_service.rest.exceptions.InvalidSongJsonFormatException;
+import ru.mail.polis.audio_service.rest.exceptions.SongAlreadyExistsException;
 import ru.mail.polis.audio_service.rest.model.Song;
 
 import java.util.ArrayList;
@@ -48,6 +50,16 @@ public class SongsController {
                 .collect(toList());
     }
 
+    @PostMapping(consumes = APPLICATION_JSON_VALUE)
+    @ResponseStatus(CREATED)
+    public void createSong(@RequestBody String songJson) throws Exception {
+        Song song = gson.fromJson(songJson, Song.class);
+        verifySong(song);
+        makeSureThatSongDoesNotAlreadyExist(song);
+        db.getCollection("songs").insertOne(Document.parse(songJson));
+    }
+
+
     private Bson createFilter(String id, String name, String artist, String genre, Integer year) {
         Bson filter = new BsonDocument();
         filter = id != null ? and(filter, eq("id", id)) : filter;
@@ -58,10 +70,20 @@ public class SongsController {
         return filter;
     }
 
-    @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    @ResponseStatus(CREATED)
-    public void createSong(@RequestBody String song) {
-        db.getCollection("songs").insertOne(Document.parse(song));
+    private void makeSureThatSongDoesNotAlreadyExist(Song song) throws SongAlreadyExistsException {
+        if (db.getCollection("songs")
+                .find(eq("id", song.getId()))
+                .first() != null) {
+            throw new SongAlreadyExistsException(song.getId());
+        }
+    }
+
+    private void verifySong(Song song) throws InvalidSongJsonFormatException {
+        if (song.getId() == null || song.getName() == null || song.getArtist() == null ||
+                song.getGenre() == null || song.getYear() <= 0 || song.getAlbum() == null || song.getLyrics() == null ||
+                song.getDuration() <= 0 || song.getReference() == null) {
+            throw new InvalidSongJsonFormatException();
+        }
     }
 
 }
